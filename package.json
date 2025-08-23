@@ -1,0 +1,19 @@
+{
+  "name": "aggregator-project",
+  "version": "1.0.0",
+  "description": "Gathers Rss feeds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cvinsf/TS-RssFeed-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cvinsf/TS-RssFeed-project/issues"
+  },
+  "homepage": "https://github.com/cvinsf/TS-RssFeed-project#readme"
+}
