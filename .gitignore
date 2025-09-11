@@ -1,2 +1,4 @@
 node_modules
 src/practice.ts
+lib/db
+.gatorconfig.json
