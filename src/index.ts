@@ -1,6 +1,6 @@
 import { CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
 import { handlerLogin, handlerRegister } from "./commands/users";
-import { connection } from "./lib/db";
+import { connection } from "./lib/db"
 
 
 async function main() {
@@ -27,8 +27,9 @@ async function main() {
       console.error(`Error running command ${cmdName}: ${err}`);
     }
     process.exit(1);
+  } finally {
+    await connection.end();
   }
-process.exit(0)
 }
 
 main();

@@ -5,7 +5,7 @@ import * as schema from "./schema";
 import { readConfig } from "src/config";
 
 const config = readConfig();
-const connection = postgres(config.dbUrl);
+export const connection = postgres(config.dbUrl);
 export const db = drizzle(connection, { schema });
 
 

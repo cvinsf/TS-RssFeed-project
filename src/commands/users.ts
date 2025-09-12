@@ -1,15 +1,17 @@
 import { setUser } from "../config";
 import { selectUserByName, createUser } from "../lib/db/queries/users";
-import { db } from "../lib/db";
-import { eq } from "drizzle-orm";
-import { users } from "../lib/db/schema";
 
 export async function handlerLogin(cmdName: string, ...args: string[]) {
   if (args.length !== 1) {
     throw new Error(`usage: ${cmdName} <name>`);
   }
-
   const userName = args[0];
+  const existingUser = await selectUserByName(userName)
+     
+  if (!existingUser) {
+    throw new Error(`User: ${userName} does not exist. Please register first.`);
+  }
+
   setUser(userName);
   console.log("User switched successfully!");
 }
@@ -25,10 +27,10 @@ export async function handlerRegister(cmdName: string, ...args: string[]) {
   console.log("About to check if user exists:", name);
   const existingUser = await selectUserByName(name);
   console.log("User check completed, result:", existingUser);
-  
+
   if (existingUser) {
     throw new Error(`User: ${name} exists, create a new user`);
-  }
+  } 
   
   console.log("About to create user:", name);
   const newUser = await createUser(name);
