@@ -1,5 +1,6 @@
-import { setUser } from "../config";
-import { selectUserByName, createUser } from "../lib/db/queries/users";
+import { readConfig, setUser } from "../config";
+import { selectUserByName, createUser, getUsers } from "../lib/db/queries/users";
+import { resetTables } from "src/lib/db/queries/delete";
 
 export async function handlerLogin(cmdName: string, ...args: string[]) {
   if (args.length !== 1) {
@@ -39,4 +40,28 @@ export async function handlerRegister(cmdName: string, ...args: string[]) {
   setUser(name);
   console.log(`User ${name} has been created successfully`);
   console.log("User data:", newUser);
+}
+
+export async function handlerReset(cmdName: string) {
+  console.log("Resetting the database...");
+  resetTables();
+}
+
+export async function handlerGetUsers(_: string) {
+  const allUsers = await getUsers();
+  const config = readConfig();
+  const currentUserName = config.currentUserName;
+
+  if (allUsers.length === 0) {
+    console.log("No users found in the database.");
+    return;
+  }
+  console.log("Retrieving Users...");
+  allUsers.forEach(user => {
+    if (user.name === currentUserName) {
+      console.log( `* ${user.name} (current)`);
+    } else {
+      console.log(`* ${user.name}`);
+    }
+  })
 }

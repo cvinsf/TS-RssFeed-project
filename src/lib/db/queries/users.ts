@@ -17,3 +17,12 @@ export async function selectUserByName(name: string) {
 
     return result;
 }
+
+export async function getUsers() {
+    const allUsers = await db.select({
+        name: users.name
+    })
+    .from(users)
+
+    return allUsers;
+}
