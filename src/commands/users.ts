@@ -65,3 +65,4 @@ export async function handlerGetUsers(_: string) {
     }
   })
 }
+
